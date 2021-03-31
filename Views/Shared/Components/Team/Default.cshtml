@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<Teams>
+
+
+<!--dropdown menu-->
+<div class="dropdown">
+    <button class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+        Filter by Team
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li class="dropdown-item">
+            <a class="dropdown-item-text" asp-action="Index" asp-controller="Home" asp-route-teamid="">All</a>
+        </li>
+        @foreach (Teams team in Model)//displays each team so they can be filtered by them
+        {
+            <li class="dropdown-item">
+                <a class="dropdown-item-text @(team.TeamName == ViewBag.SelectedTeam ? "text-light bg-dark": "") " asp-action="Index" asp-controller="Home"
+                   asp-route-teamid="@team.TeamId"
+                   asp-route-teamname="@team.TeamName">
+                    @team.TeamName
+                </a>
+            </li>
+        }
+
+    </ul>
+</div>
+
+
